@@ -1,7 +1,7 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-" variables "{{{
+" script local variables "{{{
 " options
 function! s:get(name, default) abort
   return get(g:, 'colorscheme_kemonofriends_sandstar_' . a:name, a:default)

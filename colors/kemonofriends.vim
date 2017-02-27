@@ -83,9 +83,9 @@ function! s:set() abort
     let highlight_group.ModeMsg      = [aomidori, none,     bold,      none]
     let highlight_group.MoreMsg      = [aomidori, none,     bold,      none]
     let highlight_group.Question     = [aomidori, none,     bold,      none]
-    let highlight_group.Title        = [midori,   none,     none,      none]
+    let highlight_group.Title        = [pink,     none,     none,      none]
     let highlight_group.WarningMsg   = [kimidori, none,     none,      none]
-    let highlight_group.Pmenu        = [shiro,    yamabuki, none,      none]
+    let highlight_group.Pmenu        = [kuro,     yamabuki, none,      none]
     let highlight_group.PmenuSel     = [kuro,     kiiro,    none,      none]
     let highlight_group.PmenuSbar    = [usuusuki, kogecha,  none,      none]
     let highlight_group.PmenuThumb   = [kogecha,  usuusuki, none,      none]
@@ -93,7 +93,7 @@ function! s:set() abort
     let highlight_group.DiffChange   = [none,     kiiro,    none,      none]
     let highlight_group.DiffDelete   = [none,     usuaka,   none,      none]
     let highlight_group.DiffText     = [none,     kiiro,    underline, none]
-    let highlight_group.Directory    = [midori,   none,     none,      none]
+    let highlight_group.Directory    = [pink,     none,     none,      none]
     let highlight_group.NonText      = [usuusuki, none,     none,      none]
     let highlight_group.SpecialKey   = [kimidori, none,     none,      none]
     let highlight_group.Conceal      = [kimidori, none,     none,      none]
@@ -152,15 +152,15 @@ function! s:set() abort
       endif
     augroup END
 
-    let bg_none    = {'gui': kiiro.gui, 'cterm': 'NONE'}
+    let bg_none = {'gui': usuki.gui, 'cterm': 'NONE'}
   else
     let shiro   = {'gui': '#ffffff', 'cterm': '15'}
     let haiiro1 = {'gui': '#f1f1f1', 'cterm': '255'}
     let haiiro2 = {'gui': '#d1d0d1', 'cterm': '251'}
     let haiiro3 = {'gui': '#bfbfbf', 'cterm': '249'}
-    let haiiro4 = {'gui': '#9c9c9c', 'cterm': '245'}
+    let haiiro4 = {'gui': '#a5a5a5', 'cterm': '246'}
     let haiiro5 = {'gui': '#6b6b6b', 'cterm': '240'}
-    let haiiro6 = {'gui': '#4b4b4b', 'cterm': '237'}
+    let haiiro6 = {'gui': '#565656', 'cterm': '238'}
     let haiiro7 = {'gui': '#252525', 'cterm': '234'}
     let kuro    = {'gui': '#000000', 'cterm': '0'}
     let ao1     = {'gui': '#defdfe', 'cterm': '195'}
@@ -173,7 +173,7 @@ function! s:set() abort
     let kiiro2  = {'gui': '#ffd25d', 'cterm': '220'}
 
     "*** highlight groups (:h highlight-groups) ***"
-    let highlight_group.Normal       = [shiro,   haiiro2, none,      none]
+    let highlight_group.Normal       = [haiiro6, haiiro2, none,      none]
     let highlight_group.Visual       = [none,    ao2,     none,      none]
     let highlight_group.VisualNOS    = [none,    ao2,     none,      none]
     let highlight_group.Cursor       = [ao3,     shiro,   none,      none]
@@ -216,11 +216,11 @@ function! s:set() abort
 
     "*** Syntax groups (:h group-name) ***"
     let highlight_group.Comment      = [haiiro4, none,    none,      none]
-    let highlight_group.Constant     = [haiiro6, none,    none,      none]
-    let highlight_group.Identifier   = [haiiro5, none,    none,      none]
+    let highlight_group.Constant     = [kuro,    none,    none,      none]
+    let highlight_group.Identifier   = [kuro,    none,    none,      none]
     let highlight_group.Statement    = [ao3,     none,    none,      none]
-    let highlight_group.PreProc      = [ao4,     none,    none,      none]
-    let highlight_group.Type         = [ao4,     none,    none,      none]
+    let highlight_group.PreProc      = [shiro,   none,    bold,      none]
+    let highlight_group.Type         = [shiro,   none,    bold,      none]
     let highlight_group.Special      = [ao4,     none,    none,      none]
     let highlight_group.Underlined   = [ao3,     none,    underline, none]
     let highlight_group.Ignore       = [haiiro4, none,    none,      none]
@@ -228,15 +228,15 @@ function! s:set() abort
     let highlight_group.Todo         = [ao4,     ao2,     none,      none]
 
     "*** Settings for plugins ***"
-    let highlight_group.MatchParen   = [shiro,   ao2,     none,      none]
-    let highlight_group.ColorschemeKemonofriendsLightlineHaiiro4 = [shiro,   haiiro4,   none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineHaiiro5 = [shiro,   haiiro5,   none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineAo4     = [shiro,   ao4,       none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineAo4rev  = [ao4,   shiro,       none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineAka     = [shiro,   aka2,      none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineKiiro   = [kuro,    kiiro2,    none, none]
+    let highlight_group.MatchParen = [shiro, ao2, none, none]
+    let highlight_group.ColorschemeKemonofriendsLightlineHaiiro4 = [shiro, haiiro4, none, none]
+    let highlight_group.ColorschemeKemonofriendsLightlineHaiiro5 = [shiro, haiiro5, none, none]
+    let highlight_group.ColorschemeKemonofriendsLightlineAo4     = [shiro, ao4,     none, none]
+    let highlight_group.ColorschemeKemonofriendsLightlineAo4rev  = [ao4,   shiro,   none, none]
+    let highlight_group.ColorschemeKemonofriendsLightlineAka     = [shiro, aka2,    none, none]
+    let highlight_group.ColorschemeKemonofriendsLightlineKiiro   = [kuro,  kiiro2,  none, none]
 
-    let bg_none    = {'gui': haiiro2.gui, 'cterm': 'NONE'}
+    let bg_none = {'gui': haiiro2.gui, 'cterm': 'NONE'}
   endif
 
   if get(g:, 'colorscheme_no_background', 0)
