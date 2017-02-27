@@ -169,7 +169,6 @@ function! s:next(id) abort  "{{{
     return
   endif
 
-  let options = s:shift_options()
   let circles = s:timer_table[a:id]
   try
     for highlight in circles
@@ -180,7 +179,6 @@ function! s:next(id) abort  "{{{
     call s:timer_start(s:timer_table[a:id], 50, 'terminate')
     return
   finally
-    call s:restore_options(options)
     redraw
   endtry
 
@@ -222,7 +220,6 @@ function! s:restart(id) abort "{{{
 endfunction
 "}}}
 function! s:terminate(id) abort  "{{{
-  let options = s:shift_options()
   call timer_stop(a:id)
   try
     for highlight in s:timer_table[a:id]
@@ -235,7 +232,6 @@ function! s:terminate(id) abort  "{{{
   finally
     unlet s:timer_table[a:id]
     call s:metabolize_augroup(a:id)
-    call s:restore_options(options)
     redraw
   endtry
 endfunction
@@ -269,31 +265,6 @@ function! s:got_out_of_cmdwindow() abort "{{{
   augroup colorscheme-kemonofriends-pause
     autocmd!
   augroup END
-endfunction
-"}}}
-function! s:shift_options() abort "{{{
-  let options = {}
-
-  """ tweak appearance
-  " hide_cursor
-  if s:has_gui_running
-    let options.cursor = &guicursor
-    set guicursor+=a:block-NONE
-  else
-    let options.cursor = &t_ve
-    set t_ve=
-  endif
-
-  return options
-endfunction
-"}}}
-function! s:restore_options(options) abort "{{{
-  if s:has_gui_running
-    set guicursor&
-    let &guicursor = a:options.cursor
-  else
-    let &t_ve = a:options.cursor
-  endif
 endfunction
 "}}}
 function! s:is_in_cmdline_window() abort "{{{
