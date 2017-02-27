@@ -58,6 +58,11 @@ function! colorscheme#kemonofriends#sandstar#eventColorScheme() abort "{{{
       autocmd!
     augroup END
   endif
+
+  if g:colors_name ==# 'kemonofriends' && exists('g:lightline#colorscheme#kemonofriends#palette')
+    let g:lightline#colorscheme#kemonofriends#palette = lightline#colorscheme#kemonofriends#build()
+    call lightline#colorscheme()
+  endif
 endfunction
 "}}}
 function! colorscheme#kemonofriends#sandstar#tic() abort "{{{
