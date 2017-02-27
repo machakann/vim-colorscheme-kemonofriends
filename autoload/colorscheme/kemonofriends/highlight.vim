@@ -45,12 +45,15 @@ function! s:highlight.start(colors) dict abort "{{{
   if self.colors != []
     let hi_group = remove(self.colors, 0)
     if hi_group ==# 'NONE'
-      let succeeded = 1
+      return
+    endif
+
+    if hi_group ==# 'END'
+      call self.quench()
     else
-      let succeeded = self.show(hi_group)
+      call self.show(hi_group)
     endif
   endif
-  return succeeded
 endfunction
 "}}}
 function! s:highlight.next() dict abort "{{{
