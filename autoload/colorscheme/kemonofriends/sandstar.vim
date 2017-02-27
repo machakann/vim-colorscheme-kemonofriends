@@ -286,7 +286,7 @@ function! s:terminate_autocmds(id) abort "{{{
 endfunction
 "}}}
 function! s:terminate_highlight(id, event) abort  "{{{
-  if get(s:timer_table, a:id, {}) == []
+  if get(s:timer_table, a:id, []) == []
     return
   endif
   call s:terminate(a:id)
