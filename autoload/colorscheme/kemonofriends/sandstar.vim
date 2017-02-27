@@ -229,26 +229,18 @@ function! s:terminate(id) abort  "{{{
     return 1
   finally
     unlet s:timer_table[a:id]
-    call s:metabolize_augroup(a:id)
+    call add(s:obsolete_augroup, a:id)
+    call timer_start(1000, s:SID . 'terminate_augroup')
     redraw
   endtry
 endfunction
 "}}}
-function! s:metabolize_augroup(id) abort  "{{{
-  " clean up autocommands in the current augroup
-  execute 'augroup colorscheme-kemonofriends-highlight-' . a:id
-    autocmd!
-  augroup END
-
-  " clean up obsolete augroup
-  call filter(s:obsolete_augroup, 'v:val != a:id')
+function! s:terminate_augroup(dummy) abort  "{{{
   for id in s:obsolete_augroup
-    execute 'augroup! colorscheme-kemonofriends-highlight-' . id
+    call s:terminate_autocmds(id)
+    execute 'augroup! colorscheme-kemonofriends-sandstar-' . id
   endfor
   call filter(s:obsolete_augroup, 0)
-
-  " queue the current augroup
-  call add(s:obsolete_augroup, a:id)
 endfunction
 "}}}
 function! s:get_out_of_cmdwindow() abort "{{{
@@ -270,22 +262,22 @@ function! s:is_in_cmdline_window() abort "{{{
 endfunction
 "}}}
 function! s:set_autocmds(id) abort "{{{
-  execute 'augroup colorscheme-kemonofriends-highlight-' . a:id
+  execute 'augroup colorscheme-kemonofriends-sandstar-' . a:id
     autocmd!
     execute printf('autocmd CmdWinEnter <buffer> call s:pause_in_cmdline_window(%s)', a:id)
-    execute printf('autocmd WinLeave <buffer> call s:cancel_highlight(%s, "WinLeave")', a:id)
-    execute printf('autocmd BufUnload <buffer> call s:cancel_highlight(%s, "BufUnload")', a:id)
+    execute printf('autocmd WinLeave <buffer> call s:terminate_highlight(%s, "WinLeave")', a:id)
+    execute printf('autocmd BufUnload <buffer> call s:terminate_highlight(%s, "BufUnload")', a:id)
     execute printf('autocmd BufEnter * call s:switch_highlight(%s)', a:id)
   augroup END
 endfunction
 "}}}
-function! s:cancel_autocmds(id) abort "{{{
-  execute 'augroup colorscheme-kemonofriends-highlight-' . a:id
+function! s:terminate_autocmds(id) abort "{{{
+  execute 'augroup colorscheme-kemonofriends-sandstar-' . a:id
     autocmd!
   augroup END
 endfunction
 "}}}
-function! s:cancel_highlight(id, event) abort  "{{{
+function! s:terminate_highlight(id, event) abort  "{{{
   if get(s:timer_table, a:id, {}) == []
     return
   endif
