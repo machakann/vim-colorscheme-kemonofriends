@@ -1,8 +1,7 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-" script local variables "{{{
-" options
+" global options "{{{
 function! s:get(name, default) abort
   return get(g:, 'colorscheme_kemonofriends_sandstar_' . a:name, a:default)
 endfunction
@@ -10,7 +9,8 @@ let g:colorscheme_kemonofriends_sandstar_active   = s:get('active',   1)
 let g:colorscheme_kemonofriends_sandstar_interval = s:get('interval', 50)
 let g:colorscheme_kemonofriends_sandstar_radius   = s:get('radius',   3)
 let g:colorscheme_kemonofriends_sandstar_duration = s:get('duration', 200)
-
+"}}}
+" script local variables "{{{
 " intrinsic counter
 let s:tic = 0
 
