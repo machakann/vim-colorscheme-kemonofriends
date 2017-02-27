@@ -243,6 +243,14 @@ function! s:terminate_augroup(dummy) abort  "{{{
   call filter(s:obsolete_augroup, 0)
 endfunction
 "}}}
+function! s:pause_in_cmdline_window(id) abort "{{{
+  call s:pause(a:id)
+  augroup colorscheme-kemonofriends-pause
+    autocmd!
+    autocmd CmdWinLeave * call s:get_out_of_cmdwindow()
+  augroup END
+endfunction
+"}}}
 function! s:get_out_of_cmdwindow() abort "{{{
   augroup colorscheme-kemonofriends-pause
     autocmd!
@@ -267,7 +275,7 @@ function! s:set_autocmds(id) abort "{{{
     execute printf('autocmd CmdWinEnter <buffer> call s:pause_in_cmdline_window(%s)', a:id)
     execute printf('autocmd WinLeave <buffer> call s:terminate_highlight(%s, "WinLeave")', a:id)
     execute printf('autocmd BufUnload <buffer> call s:terminate_highlight(%s, "BufUnload")', a:id)
-    execute printf('autocmd BufEnter * call s:switch_highlight(%s)', a:id)
+    execute printf('autocmd BufEnter * call s:toggle_highlight(%s)', a:id)
   augroup END
 endfunction
 "}}}
@@ -284,7 +292,7 @@ function! s:terminate_highlight(id, event) abort  "{{{
   call s:terminate(a:id)
 endfunction
 "}}}
-function! s:switch_highlight(id) abort "{{{
+function! s:toggle_highlight(id) abort "{{{
   let circles = get(s:timer_table, a:id, [])
   if circles == []
     return
@@ -299,14 +307,6 @@ function! s:switch_highlight(id) abort "{{{
   else
     call s:hide(a:id)
   endif
-endfunction
-"}}}
-function! s:pause_in_cmdline_window(id) abort "{{{
-  call s:pause(a:id)
-  augroup colorscheme-kemonofriends-pause
-    autocmd!
-    autocmd CmdWinLeave * call s:get_out_of_cmdwindow()
-  augroup END
 endfunction
 "}}}
 "}}}
