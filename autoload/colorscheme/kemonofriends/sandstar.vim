@@ -51,9 +51,7 @@ function! colorscheme#kemonofriends#sandstar#eventColorScheme() abort "{{{
       autocmd CursorMoved * call colorscheme#kemonofriends#sandstar#tic()
     augroup END
   else
-    for id in map(keys(s:timer_table), 'str2nr(v:val)')
-      call s:terminate(id)
-    endfor
+    call colorscheme#kemonofriends#sandstar#disappear()
     augroup colorscheme-kemonofriends-event-CursorMoved
       autocmd!
     augroup END
@@ -105,7 +103,7 @@ function! colorscheme#kemonofriends#sandstar#emerge(pos, radius, ...) abort "{{{
   endif
 endfunction
 "}}}
-function! colorscheme#kemonofriends#sandstar#quench(...) abort "{{{
+function! colorscheme#kemonofriends#sandstar#disappear(...) abort "{{{
   if a:0 > 0
     let id_list = type(a:1) == s:type_list ? a:1 : a:000
   else
