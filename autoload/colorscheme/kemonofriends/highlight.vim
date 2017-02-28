@@ -65,10 +65,7 @@ function! s:highlight.next() dict abort "{{{
   let hi_group = remove(self.colors, 0)
   if hi_group ==# 'NONE'
     call self.move_up(1)
-    return
-  endif
-
-  if hi_group ==# 'QUENCH'
+  elseif hi_group ==# 'QUENCH'
     call self.quench()
   else
     call self.move_up(1)
