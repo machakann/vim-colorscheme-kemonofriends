@@ -92,8 +92,12 @@ function! colorscheme#kemonofriends#sandstar#emerge(pos, radius, ...) abort "{{{
     for i in range(len(positions))
       let r = r_array[i]
       let rgroup = positions[i]
-      let color_sequence = repeat(['NONE'], r) + repeat(color_series + reverse(copy(color_series))[1:], 3) + ['END']
+      if rgroup == []
+        continue
+      endif
+      let color_sequence = repeat(['NONE'], r) + repeat(color_series + reverse(copy(color_series))[1:], 2) + ['QUENCH']
       let highlight = colorscheme#kemonofriends#highlight#new(rgroup, color_sequence)
+      call highlight.start()
       call add(circles, highlight)
     endfor
     let id = s:timer_start(circles, duration, 'next', -1)
@@ -116,7 +120,11 @@ endfunction
 
 function! s:list_square_pos(center, radius) abort "{{{
   let positions = []
-  call add(positions, [copy(a:center)])
+  if a:center[0] >= 1
+    call add(positions, [copy(a:center)])
+  else
+    call add(positions, [])
+  endif
   if a:radius > 0
     for r in range(1, a:radius)
       let temp = []
@@ -130,6 +138,7 @@ function! s:list_square_pos(center, radius) abort "{{{
           call add(temp, [a:center[0] - dx[i], a:center[1] + dy[i]])
         endif
       endfor
+      call filter(temp, 'v:val[0] >= 1')
       call add(positions, temp)
     endfor
   endif
@@ -163,11 +172,9 @@ function! s:next(id) abort  "{{{
     " NOTE: For "textlock"
     call s:timer_start(s:timer_table[a:id], 50, 'terminate')
     return
-  finally
-    redraw
   endtry
 
-  call filter(circles, 'v:val.colors != []')
+  call filter(circles, 'v:val.colors != [] && v:val.positions != []')
   if circles == []
     call s:terminate(a:id)
   endif
@@ -218,7 +225,6 @@ function! s:terminate(id) abort  "{{{
     unlet s:timer_table[a:id]
     call add(s:obsolete_augroup, a:id)
     call timer_start(1000, s:SID . 'terminate_augroup')
-    redraw
   endtry
 endfunction
 "}}}

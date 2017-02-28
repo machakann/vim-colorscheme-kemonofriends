@@ -5,8 +5,8 @@ set cpo&vim
 
 function! colorscheme#kemonofriends#highlight#new(positions, colors) abort  "{{{
   " NOTE: The 'positions' is the list of positions, like [[1, 1], [1, 2], ...].
-  " NOTE: The 'colors' is the list of color sequence, like ['Visual', 'NONE', 'END'].
-  "       'NONE' does nothing. 'END' quench highlight and terminates the sequence.
+  " NOTE: The 'colors' is the list of color sequence, like ['Visual', 'NONE', 'QUENCH'].
+  "       'NONE' does nothing. 'QUENCH' quenches highlight.
   let highlight = deepcopy(s:highlight)
   for pos in deepcopy(a:positions)
     if highlight.positions == [] || len(highlight.positions[-1]) == 7
@@ -48,7 +48,7 @@ function! s:highlight.start() dict abort "{{{
       return
     endif
 
-    if hi_group ==# 'END'
+    if hi_group ==# 'QUENCH'
       call self.quench()
     else
       call self.show(hi_group)
@@ -58,18 +58,20 @@ function! s:highlight.start() dict abort "{{{
 endfunction
 "}}}
 function! s:highlight.next() dict abort "{{{
-  if self.colors == []
+  if self.colors == [] || self.positions == []
     return
   endif
 
   let hi_group = remove(self.colors, 0)
   if hi_group ==# 'NONE'
+    call self.move_up(1)
     return
   endif
 
-  if hi_group ==# 'END'
+  if hi_group ==# 'QUENCH'
     call self.quench()
   else
+    call self.move_up(1)
     if self.on
       call self.change(hi_group)
     else
@@ -81,18 +83,21 @@ endfunction
 function! s:highlight.change(hi_group) dict abort "{{{
   let [tabnr, winnr, view] = [tabpagenr(), winnr(), winsaveview()]
   call self.quench()
-  let succeeded = 1
   if self.is_in_highlighted_window()
-    let succeeded = self.show(a:hi_group)
+    call self.show(a:hi_group)
   else
     if self.goto_highlighted_window()
-      let succeeded = self.show(a:hi_group)
-    else
-      let succeeded = 0
+      call self.show(a:hi_group)
     endif
     call s:goto_window(winnr, tabnr, view)
   endif
-  return succeeded
+endfunction
+"}}}
+function! s:highlight.move_up(n) dict abort "{{{
+  for pos_list in self.positions
+    call filter(map(pos_list, 's:move_up(v:val, a:n)'), 'v:val[0] >= 1')
+  endfor
+  call filter(self.positions, 'v:val != []')
 endfunction
 "}}}
 function! s:highlight.show(...) dict abort "{{{
@@ -116,7 +121,7 @@ function! s:highlight.show(...) dict abort "{{{
 
   let endline = line('$')
   let filter = '1 <= v:val[0] && v:val[0] <= endline
-           \ && 1 <= v:val[1] && v:val[1] <= col([v:val[0], '$'])'
+           \ && 1 <= v:val[1] && v:val[1] <= col([v:val[0], "$"])'
   for pos_list in self.positions
     let filtered = filter(copy(pos_list), filter)
     call add(self.hi_ids, matchaddpos(hi_group, filtered))
@@ -194,6 +199,11 @@ function! s:goto_tab(tabnr) abort  "{{{
     execute 'noautocmd tabnext ' . a:tabnr
   endif
   return tabpagenr() == a:tabnr ? 1 : 0
+endfunction
+"}}}
+function! s:move_up(pos, n) abort "{{{
+  let a:pos[0] -= a:n
+  return a:pos
 endfunction
 "}}}
 
