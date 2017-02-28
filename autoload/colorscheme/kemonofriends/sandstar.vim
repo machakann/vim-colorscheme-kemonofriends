@@ -7,7 +7,6 @@ function! s:get(name, default) abort
 endfunction
 let g:colorscheme_kemonofriends_sandstar_active   = s:get('active',   1)
 let g:colorscheme_kemonofriends_sandstar_interval = s:get('interval', 50)
-let g:colorscheme_kemonofriends_sandstar_radius   = s:get('radius',   3)
 let g:colorscheme_kemonofriends_sandstar_duration = s:get('duration', 200)
 "}}}
 " script local variables "{{{
@@ -76,7 +75,7 @@ function! colorscheme#kemonofriends#sandstar#tic() abort "{{{
     return
   endif
 
-  let radius = g:colorscheme_kemonofriends_sandstar_radius
+  let radius = s:get_radius()
   call colorscheme#kemonofriends#sandstar#emerge(getpos('.')[1:2], radius)
   let s:tic = 0
 endfunction
@@ -117,6 +116,21 @@ function! colorscheme#kemonofriends#sandstar#vanish(...) abort "{{{
 endfunction
 "}}}
 
+function! s:get_radius() abort "{{{
+  let n = localtime()
+  let n = n - n/10*10
+  if n <= 1
+    let radius = 0
+  elseif n <= 4
+    let radius = 1
+  elseif n <= 7
+    let radius = 2
+  else
+    let radius = 3
+  endif
+  return radius
+endfunction
+"}}}
 function! s:list_square_pos(center, radius) abort "{{{
   let positions = []
   if a:center[0] >= 1

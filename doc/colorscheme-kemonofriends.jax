@@ -1,12 +1,12 @@
 *colorscheme-kemonofriends.jax*	ようこそジャパリパークへ！
-					Last change:26-Feb-2017.
+					Last change:28-Feb-2017.
 
 かいたひと : machakann <mckn{at}outlook.jp>
 らいせんす : NYSL license
           にほんご <http://www.kmonos.net/nysl/>
           English (Unofficial) <http://www.kmonos.net/nysl/index.en.html>
 
-ひっすようけん:	Vim 8.0 よりあたらしい
+Vim 8.0 よりあたらしい Vim をつかってね！
 
 ==============================================================================
 USAGE					*colorscheme-kemonofriends-usage*
@@ -23,8 +23,6 @@ USAGE					*colorscheme-kemonofriends-usage*
 	" サンドスターのちょうせい
 	"" つぎのはっせいまでのかんかく (> 0)
 	let g:colorscheme_kemonofriends_sandstar_interval = 100
-	"" おおきさ (>= 0)
-	let g:colorscheme_kemonofriends_sandstar_size = 3
 	"" ひかるじかん (> 0)
 	let g:colorscheme_kemonofriends_sandstar_duration = 200
 <
