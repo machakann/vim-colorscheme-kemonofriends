@@ -40,7 +40,7 @@ function! s:set() abort
     let usuhai   = {'gui': '#eeeee0', 'cterm': '255'}
     let aka      = {'gui': '#e70012', 'cterm': '1'}
     let usuaka   = {'gui': '#fcba85', 'cterm': '216'}
-    let murasaki = {'gui': '#ab2b8c', 'cterm': '91'}
+    let murasaki = {'gui': '#a02e9d', 'cterm': '91'}
     let kogecha  = {'gui': '#3f2116', 'cterm': '52'}
     let kuro     = {'gui': '#3f2116', 'cterm': '233'}
     let ss_p1    = {'gui': '#fcbafc', 'cterm': '224'}
