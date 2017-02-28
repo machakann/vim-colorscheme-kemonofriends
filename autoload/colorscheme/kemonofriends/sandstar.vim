@@ -156,7 +156,7 @@ function! s:savewinview() abort "{{{
 endfunction
 "}}}
 function! s:restwinview(location) abort "{{{
-  if win_getid != a:location.winid
+  if win_getid() != a:location.winid
     call win_gotoid(a:location.winid)
     call winrestview(a:location.view)
   endif
