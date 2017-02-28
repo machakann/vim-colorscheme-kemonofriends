@@ -60,6 +60,9 @@ function! colorscheme#kemonofriends#sandstar#eventColorScheme() abort "{{{
   if g:colors_name ==# 'kemonofriends' && exists('g:lightline#colorscheme#kemonofriends#palette')
     let g:lightline#colorscheme#kemonofriends#palette = lightline#colorscheme#kemonofriends#build()
     call lightline#colorscheme()
+    let location = s:savewinview()
+    windo call lightline#update_once()
+    call s:restwinview(location)
   endif
 endfunction
 "}}}
@@ -143,6 +146,20 @@ function! s:list_square_pos(center, radius) abort "{{{
     endfor
   endif
   return positions
+endfunction
+"}}}
+function! s:savewinview() abort "{{{
+  let location = {}
+  let location.winid = win_getid()
+  let location.view = winsaveview()
+  return location
+endfunction
+"}}}
+function! s:restwinview(location) abort "{{{
+  if win_getid != a:location.winid
+    call win_gotoid(a:location.winid)
+    call winrestview(a:location.view)
+  endif
 endfunction
 "}}}
 
