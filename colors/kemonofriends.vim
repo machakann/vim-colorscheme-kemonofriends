@@ -113,20 +113,20 @@ function! s:set() abort
 
     "*** Settings for plugins ***"
     let highlight_group.MatchParen = [shiro, kimidori, none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineKe1 = [shiro, midori,   none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineKe2 = [shiro, kimidori, none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineMo1 = [kuro,  kiiro,    none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineMo2 = [shiro, daidai,   none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineNo1 = [shiro, aomidori, none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineNo2 = [shiro, pink,     none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineFu1 = [shiro, mizuiro,  none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineFu2 = [shiro, ao,       none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineRe1 = [shiro, haiiro,   none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineRe2 = [kuro,  usuhai,   none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineNn1 = [shiro, kiiro,    none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineNn2 = [shiro, aka,      none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineZu1 = [shiro, uguisu,   none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineZu2 = [shiro, murasaki, none, none]
+    let highlight_group.ColorschemeKemonofriendsKe1 = [shiro, midori,   none, none]
+    let highlight_group.ColorschemeKemonofriendsKe2 = [shiro, kimidori, none, none]
+    let highlight_group.ColorschemeKemonofriendsMo1 = [kuro,  kiiro,    none, none]
+    let highlight_group.ColorschemeKemonofriendsMo2 = [shiro, daidai,   none, none]
+    let highlight_group.ColorschemeKemonofriendsNo1 = [shiro, aomidori, none, none]
+    let highlight_group.ColorschemeKemonofriendsNo2 = [shiro, pink,     none, none]
+    let highlight_group.ColorschemeKemonofriendsFu1 = [shiro, mizuiro,  none, none]
+    let highlight_group.ColorschemeKemonofriendsFu2 = [shiro, ao,       none, none]
+    let highlight_group.ColorschemeKemonofriendsRe1 = [shiro, haiiro,   none, none]
+    let highlight_group.ColorschemeKemonofriendsRe2 = [kuro,  usuhai,   none, none]
+    let highlight_group.ColorschemeKemonofriendsNn1 = [shiro, kiiro,    none, none]
+    let highlight_group.ColorschemeKemonofriendsNn2 = [shiro, aka,      none, none]
+    let highlight_group.ColorschemeKemonofriendsZu1 = [shiro, uguisu,   none, none]
+    let highlight_group.ColorschemeKemonofriendsZu2 = [shiro, murasaki, none, none]
 
     "*** Settings for sandstars ***"
     let highlight_group.ColorschemeKemonofriendsSandstarPink1   = [none, ss_p1, none, none]
@@ -229,12 +229,12 @@ function! s:set() abort
 
     "*** Settings for plugins ***"
     let highlight_group.MatchParen = [shiro, ao2, none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineHaiiro4 = [shiro, haiiro4, none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineHaiiro5 = [shiro, haiiro5, none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineAo4     = [shiro, ao4,     none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineAo4rev  = [ao4,   shiro,   none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineAka     = [shiro, aka2,    none, none]
-    let highlight_group.ColorschemeKemonofriendsLightlineKiiro   = [kuro,  kiiro2,  none, none]
+    let highlight_group.ColorschemeKemonofriendsHaiiro4 = [shiro, haiiro4, none, none]
+    let highlight_group.ColorschemeKemonofriendsHaiiro5 = [shiro, haiiro5, none, none]
+    let highlight_group.ColorschemeKemonofriendsAo4     = [shiro, ao4,     none, none]
+    let highlight_group.ColorschemeKemonofriendsAo4rev  = [ao4,   shiro,   none, none]
+    let highlight_group.ColorschemeKemonofriendsAka     = [shiro, aka2,    none, none]
+    let highlight_group.ColorschemeKemonofriendsKiiro   = [kuro,  kiiro2,  none, none]
 
     let bg_none = {'gui': haiiro2.gui, 'cterm': 'NONE'}
   endif
