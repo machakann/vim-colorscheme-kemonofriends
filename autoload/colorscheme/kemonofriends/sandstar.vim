@@ -83,19 +83,17 @@ function! colorscheme#kemonofriends#sandstar#tic() abort "{{{
 endfunction
 "}}}
 function! colorscheme#kemonofriends#sandstar#emerge(pos, radius, ...) abort "{{{
-  let color_series = a:0 > 0 ? a:1 : s:color.get_series()
-  let duration = a:0 > 1 ? a:2 : g:colorscheme_kemonofriends_sandstar_duration
+  let duration = a:0 > 0 ? a:1 : g:colorscheme_kemonofriends_sandstar_duration
   if duration > 0
-    let positions = s:get_square_pos(a:pos, a:radius)
+    let color_series = a:0 > 1 ? a:2 : s:color.get_series()
+    let positions = s:list_square_pos(a:pos, a:radius)
     let r_array = range(len(positions))
     let circles = []
     for i in range(len(positions))
       let r = r_array[i]
       let rgroup = positions[i]
       let color_sequence = repeat(['NONE'], r) + repeat(color_series + reverse(copy(color_series))[1:], 3) + ['END']
-      let highlight = colorscheme#kemonofriends#highlight#new()
-      call highlight.order(rgroup)
-      call highlight.start(color_sequence)
+      let highlight = colorscheme#kemonofriends#highlight#new(rgroup, color_sequence)
       call add(circles, highlight)
     endfor
     let id = s:timer_start(circles, duration, 'next', -1)
@@ -116,17 +114,6 @@ function! colorscheme#kemonofriends#sandstar#vanish(...) abort "{{{
 endfunction
 "}}}
 
-function! s:get_square_pos(center, radius) abort "{{{
-  let positions = s:list_square_pos(a:center, a:radius)
-  let endline = line('$')
-  let filter = '1 <= v:val[0] && v:val[0] <= endline
-           \ && 1 <= v:val[1] && v:val[1] <= col([v:val[0], "$"])'
-  for rgroup in positions
-    call filter(rgroup, filter)
-  endfor
-  return positions
-endfunction
-"}}}
 function! s:list_square_pos(center, radius) abort "{{{
   let positions = []
   call add(positions, [copy(a:center)])

@@ -3,8 +3,19 @@
 let s:save_cpo = &cpo
 set cpo&vim
 
-function! colorscheme#kemonofriends#highlight#new() abort  "{{{
-  return deepcopy(s:highlight)
+function! colorscheme#kemonofriends#highlight#new(positions, colors) abort  "{{{
+  " NOTE: The 'positions' is the list of positions, like [[1, 1], [1, 2], ...].
+  " NOTE: The 'colors' is the list of color sequence, like ['Visual', 'NONE', 'END'].
+  "       'NONE' does nothing. 'END' quench highlight and terminates the sequence.
+  let highlight = deepcopy(s:highlight)
+  for pos in deepcopy(a:positions)
+    if highlight.positions == [] || len(highlight.positions[-1]) == 7
+      call add(highlight.positions, [])
+    endif
+    call add(highlight.positions[-1], pos)
+  endfor
+  let highlight.colors = deepcopy(a:colors)
+  return highlight
 endfunction
 "}}}
 
@@ -30,18 +41,7 @@ function! s:highlight.initialize() dict abort "{{{
   let self.colors = []
 endfunction
 "}}}
-function! s:highlight.order(positions) dict abort  "{{{
-  " NOTE: The arguments are the list of positions, like [[1, 1], [1, 2], ...].
-  for pos in a:positions
-    if self.positions == [] || len(self.positions[-1]) == 7
-      call add(self.positions, [])
-    endif
-    call add(self.positions[-1], deepcopy(pos))
-  endfor
-endfunction
-"}}}
-function! s:highlight.start(colors) dict abort "{{{
-  let self.colors = deepcopy(a:colors)
+function! s:highlight.start() dict abort "{{{
   if self.colors != []
     let hi_group = remove(self.colors, 0)
     if hi_group ==# 'NONE'
@@ -54,6 +54,7 @@ function! s:highlight.start(colors) dict abort "{{{
       call self.show(hi_group)
     endif
   endif
+  return self
 endfunction
 "}}}
 function! s:highlight.next() dict abort "{{{
@@ -113,8 +114,12 @@ function! s:highlight.show(...) dict abort "{{{
     call self.quench()
   endif
 
+  let endline = line('$')
+  let filter = '1 <= v:val[0] && v:val[0] <= endline
+           \ && 1 <= v:val[1] && v:val[1] <= col([v:val[0], '$'])'
   for pos_list in self.positions
-    call add(self.hi_ids, matchaddpos(hi_group, pos_list))
+    let filtered = filter(copy(pos_list), filter)
+    call add(self.hi_ids, matchaddpos(hi_group, filtered))
   endfor
   call filter(self.hi_ids, 'v:val > 0')
   let self.on = 1
