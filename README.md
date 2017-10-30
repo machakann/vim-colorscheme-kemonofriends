@@ -4,6 +4,7 @@
 
 ```vim
 colorscheme kemonofriends
+set background=light
 ```
 
 ## あなたサンドスターあまりすきじゃないけものなんだね
