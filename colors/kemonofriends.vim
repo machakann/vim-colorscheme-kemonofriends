@@ -19,6 +19,7 @@ function! s:set() abort
   let bold       = {'gui': 'bold',      'cterm': 'bold'}
   let underline  = {'gui': 'underline', 'cterm': 'underline'}
   let undercurl  = {'gui': 'undercurl', 'cterm': 'underline'}
+  let boldunderline = {'gui': 'bold,underline', 'cterm': 'bold,underline'}
 
   let highlight_group = {}
   if &background ==# 'light'
@@ -112,7 +113,7 @@ function! s:set() abort
     let highlight_group.Todo         = [pink,     shiro,    bold,      none]
 
     "*** Settings for plugins ***"
-    let highlight_group.MatchParen = [shiro, kimidori, none, none]
+    let highlight_group.MatchParen = [pink, none, boldunderline, none]
     let highlight_group.ColorschemeKemonofriendsKe1 = [shiro, midori,   none, none]
     let highlight_group.ColorschemeKemonofriendsKe2 = [shiro, kimidori, none, none]
     let highlight_group.ColorschemeKemonofriendsMo1 = [kuro,  kiiro,    none, none]
@@ -228,7 +229,7 @@ function! s:set() abort
     let highlight_group.Todo         = [ao4,     ao2,     none,      none]
 
     "*** Settings for plugins ***"
-    let highlight_group.MatchParen = [shiro, ao2, none, none]
+    let highlight_group.MatchParen = [ao3, none, boldunderline, none]
     let highlight_group.ColorschemeKemonofriendsHaiiro4 = [shiro, haiiro4, none, none]
     let highlight_group.ColorschemeKemonofriendsHaiiro5 = [shiro, haiiro5, none, none]
     let highlight_group.ColorschemeKemonofriendsAo4     = [shiro, ao4,     none, none]
