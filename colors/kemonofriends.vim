@@ -87,7 +87,7 @@ function! s:set() abort
     let highlight_group.MoreMsg      = [aomidori, none,     bold,      none]
     let highlight_group.Question     = [aomidori, none,     bold,      none]
     let highlight_group.Title        = [pink,     none,     none,      none]
-    let highlight_group.WarningMsg   = [kimidori, none,     none,      none]
+    let highlight_group.WarningMsg   = [ao,       none,     none,      none]
     let highlight_group.Pmenu        = [kuro,     yamabuki, none,      none]
     let highlight_group.PmenuSel     = [kuro,     kiiro,    none,      none]
     let highlight_group.PmenuSbar    = [usuusuki, kogecha,  none,      none]
