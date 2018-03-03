@@ -67,6 +67,8 @@ function! s:set() abort
     let highlight_group.CursorColumn = highlight_group.CursorLine
     let highlight_group.StatusLine   = [usuusuki, kogecha,  none,      none]
     let highlight_group.StatusLineNC = [shiro,    kogecha,  none,      none]
+    let highlight_group.StatusLineTerm = highlight_group.StatusLine
+    let highlight_group.StatusLineTermNC = highlight_group.StatusLineNC
     let highlight_group.WildMenu     = [kogecha,  usuusuki, none,      none]
     let highlight_group.LineNr       = [kogecha,  kiiro,    none,      none]
     let highlight_group.CursorLineNr = [pink,     kiiro,    bold,      none]
@@ -183,6 +185,8 @@ function! s:set() abort
     let highlight_group.CursorColumn = highlight_group.CursorLine
     let highlight_group.StatusLine   = [shiro,   haiiro7, none,      none]
     let highlight_group.StatusLineNC = [haiiro3, haiiro7, none,      none]
+    let highlight_group.StatusLineTerm = highlight_group.StatusLine
+    let highlight_group.StatusLineTermNC = highlight_group.StatusLineNC
     let highlight_group.WildMenu     = [haiiro7, haiiro1, none,      none]
     let highlight_group.LineNr       = [kuro,    haiiro1, none,      none]
     let highlight_group.CursorLineNr = [ao3,     haiiro1, bold,      none]
